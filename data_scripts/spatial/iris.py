@@ -17,13 +17,12 @@ def execute(context):
     df_codes = context.stage("data.spatial.codes")
 
     source_path = find_iris("{}/{}".format(context.config("data_path"), context.config("iris_path")))
-
+    
     with py7zr.SevenZipFile(source_path) as archive:
         contour_paths = [
             path for path in archive.getnames()
             if "LAMB93" in path
         ]
-
         archive.extract(context.path(), contour_paths)
     
     shp_path = [path for path in contour_paths if path.endswith(".shp")]
