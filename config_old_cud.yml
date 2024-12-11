@@ -1,4 +1,4 @@
-## Synthetic population pipeline for CUD (Commmunauté Urbaine de Dunkerque)
+## Synthetic population pipeline for Île-de-France
 ## based on the synpp package
 
 # This is the path to a directory where the pipeline can store temporary data
@@ -7,7 +7,7 @@ working_directory: C:/Users/veltin/ile-de-france/data_output/cache
 # This section defines which parts of the pipeline should be run
 run:
   - synthesis.output # To create the output population in the output_path (see below)
-  # - matsim.output # Uncomment, if you want to run the full simulation (you'll need Java for that)
+  #- matsim.output # Uncomment, if you want to run the full simulation (you'll need Java for that)
 
 # Here the configuraiton of the pipeline starts
 config:
@@ -15,19 +15,15 @@ config:
   processes: 4
 
   # Define whether to use ENTD or EGT as the household travel survey (HTS)
-  hts: edgt_dunkerque
-  edgt_dunkerque_source: adisp
-  
-
+  hts: entd
 
   # Define sampling rate and random seed for the output population
-  sampling_rate: 0.001
+  sampling_rate: 0.01
   random_seed: 1234
 
   # Paths to the input data and where the output should be stored
-  data_path: C:/Users/veltin/ile-de-france/data_sources/data_sources_cud
+  data_path: C:/Users/veltin/ile-de-france/data_sources
   output_path: C:/Users/veltin/ile-de-france/data_output/output
-  output_prefix: cud_
 
   # Only interesting if you run the simulation
   java_memory: 14G
@@ -35,10 +31,9 @@ config:
   # Activate if you want to run mode choice
   mode_choice: false
 
-  # Lyon settings
-  regions: []
+  # Uncommented below to enable vehicle fleet generation
+  # generate_vehicles_file: True
+  # generate_vehicles_method: fleet_sample
+  # vehicles_data_year: 2015
+  regions: [32]
   departments: [62, 59]
-  # gtfs_path: gtfs_cud
-  # osm_path: osm_cud
-  ban_path: ban_cud
-  bdtopo_path: bdtopo_cud

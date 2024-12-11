@@ -41,11 +41,11 @@ def execute(context):
     # Load households
     df_households = pd.concat([
         pd.read_csv(
-            "%s/edgt_lyon_2015/lyon_2015_std_faf_men.csv"
+            "%s/edgt_dunkerque/dunkerque_2015_std_faf_men.csv"
             % context.config("data_path"), sep=";", usecols = list(HOUSEHOLD_COLUMNS.keys()), dtype = HOUSEHOLD_COLUMNS
         ),
         pd.read_csv(
-            "%s/edgt_lyon_2015/lyon_2015_std_tel_men.csv"
+            "%s/edgt_dunkerque/dunkerque_2015_std_tel_men.csv"
             % context.config("data_path"), sep=";", usecols = list(HOUSEHOLD_COLUMNS.keys()), dtype = HOUSEHOLD_COLUMNS
         )
     ])
@@ -53,11 +53,11 @@ def execute(context):
     # Load persons
     df_persons = pd.concat([
         pd.read_csv(
-            "%s/edgt_lyon_2015/lyon_2015_std_faf_pers.csv"
+            "%s/edgt_dunkerque/dunkerque_2015_std_faf_pers.csv"
             % context.config("data_path"), sep=";", usecols = list(PERSON_COLUMNS.keys()), dtype = PERSON_COLUMNS
         ),
         pd.read_csv(
-            "%s/edgt_lyon_2015/lyon_2015_std_tel_pers.csv"
+            "%s/edgt_dunkerque/dunkerque_2015_std_tel_pers.csv"
             % context.config("data_path"), sep=";", usecols = list(PERSON_COLUMNS.keys()), dtype = PERSON_COLUMNS
         )
     ])
@@ -65,42 +65,41 @@ def execute(context):
     # Load trips
     df_trips = pd.concat([
         pd.read_csv(
-            "%s/edgt_lyon_2015/lyon_2015_std_faf_depl.csv"
+            "%s/edgt_dunkerque/dunkerque_2015_std_faf_depl.csv"
             % context.config("data_path"), sep=";", usecols = list(TRIP_COLUMNS.keys()), dtype = TRIP_COLUMNS
         ),
         pd.read_csv(
-            "%s/edgt_lyon_2015/lyon_2015_std_tel_depl.csv"
+            "%s/edgt_dunkerque/dunkerque_2015_std_tel_depl.csv"
             % context.config("data_path"), sep=";", usecols = list(TRIP_COLUMNS.keys()), dtype = TRIP_COLUMNS
         )
     ])
 
     # Load spatial data
     df_spatial = gpd.read_file(
-        "%s/edgt_lyon_2015/EDGT_AML2015_ZF_GT.TAB"
+        "%s/edgt_dunkerque/EDGT_Dunkerque_2015_GT.TAB"
         % context.config("data_path"))
 
     return df_households, df_persons, df_trips, df_spatial
 
 FILES = [
-    "lyon_2015_std_faf_men.csv",
-    "lyon_2015_std_tel_men.csv",
-    "lyon_2015_std_faf_pers.csv",
-    "lyon_2015_std_tel_pers.csv",
-    "lyon_2015_std_faf_depl.csv",
-    "lyon_2015_std_tel_depl.csv",
-    "EDGT_AML2015_ZF_GT.DAT",
-    "EDGT_AML2015_ZF_GT.ID",
-    "EDGT_AML2015_ZF_GT.IND",
-    "EDGT_AML2015_ZF_GT.MAP",
-    "EDGT_AML2015_ZF_GT.TAB"
+    "dunkerque_2015_std_faf_men.csv",
+    "dunkerque_2015_std_tel_men.csv",
+    "dunkerque_2015_std_faf_pers.csv",
+    "dunkerque_2015_std_tel_pers.csv",
+    "dunkerque_2015_std_faf_depl.csv",
+    "dunkerque_2015_std_tel_depl.csv",
+    "EDGT_Dunkerque_2015_GT.DAT",
+    "EDGT_Dunkerque_2015_GT.ID",
+    "EDGT_Dunkerque_2015_GT.MAP",
+    "EDGT_Dunkerque_2015_GT.TAB"
 ]
 
 def validate(context):
     for name in FILES:
-        if not os.path.exists("%s/edgt_lyon_2015/%s" % (context.config("data_path"), name)):
+        if not os.path.exists("%s/edgt_dunkerque/%s" % (context.config("data_path"), name)):
             raise RuntimeError("File missing from EDGT: %s" % name)
 
     return [
-        os.path.getsize("%s/edgt_lyon_2015/%s" % (context.config("data_path"), name))
+        os.path.getsize("%s/edgt_dunkerque/%s" % (context.config("data_path"), name))
         for name in FILES
     ]
