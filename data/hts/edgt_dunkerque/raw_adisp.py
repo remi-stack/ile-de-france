@@ -76,7 +76,7 @@ def execute(context):
 
     # Load spatial data
     df_spatial = gpd.read_file(
-        "%s/edgt_dunkerque/EDGT_Dunkerque_2015_GT.TAB"
+        "%s/edgt_dunkerque/EDGT_Dunkerque_2015_ZF.TAB"
         % context.config("data_path"))
 
     return df_households, df_persons, df_trips, df_spatial
@@ -88,10 +88,10 @@ FILES = [
     "dunkerque_2015_std_tel_pers.csv",
     "dunkerque_2015_std_faf_depl.csv",
     "dunkerque_2015_std_tel_depl.csv",
-    "EDGT_Dunkerque_2015_GT.DAT",
-    "EDGT_Dunkerque_2015_GT.ID",
-    "EDGT_Dunkerque_2015_GT.MAP",
-    "EDGT_Dunkerque_2015_GT.TAB"
+    "EDGT_Dunkerque_2015_ZF.DAT",
+    "EDGT_Dunkerque_2015_ZF.ID",
+    "EDGT_Dunkerque_2015_ZF.MAP",
+    "EDGT_Dunkerque_2015_ZF.TAB"
 ]
 
 def validate(context):

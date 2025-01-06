@@ -31,9 +31,9 @@ def execute(context):
     df_households, df_persons, df_trips, df_spatial = context.stage("data.hts.edgt_dunkerque.raw_adisp")
 
     # Merge departement into households
-    df_spatial = df_spatial[["ZF__2015", "DepCom"]].copy()
-    df_spatial["ZFM"] = df_spatial["ZF__2015"].astype(str).str.pad(width=8, side='left', fillchar='0')
-    df_spatial["departement_id"] = df_spatial["DepCom"].str[:2]
+    df_spatial = df_spatial[["ZONE_FINE", "CODE_INSEE"]].copy()
+    df_spatial["ZFM"] = df_spatial["ZONE_FINE"].astype(str).str.pad(width=8, side='left', fillchar='0')
+    df_spatial["departement_id"] = df_spatial["CODE_INSEE"].str[:2]
     df_spatial = df_spatial[["ZFM", "departement_id"]]
 
     # Attention, some households get lost here!
